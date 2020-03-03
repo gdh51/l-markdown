@@ -16,3 +16,7 @@ export function throttle (fn, ctx, time) {
         }, time);
     }
 }
+
+export function isTreeNode (node) {
+    return node && (node.name === 'TreeNode');
+}

@@ -84,10 +84,7 @@ export default {
                 mdRenderHelper.bindElement(mdRenderHelper.nodesTreeMap ,this.$refs);
 
                 // 挂载完毕后将文章的标题元素暴露接口给外部
-                this.$emit('md-dom-tree', {
-                    nodesTreeMap: mdRenderHelper.nodesTreeMap,
-                    nodesTreeRoot: mdRenderHelper.nodesTreeRoot
-                });
+                this.$emit('md-dom-tree', mdRenderHelper.nodesTreeMap);
             }
         }
     }

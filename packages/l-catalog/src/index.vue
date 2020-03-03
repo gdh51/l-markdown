@@ -30,7 +30,7 @@
 <script>
 import SubList from './components/sub-list'
 import LGradientColor from '../../l-gradient-color/src/index.vue'
-import { initCatalogCom } from './components/util/state'
+import { initCatalogCom } from './util/state'
 
 export default {
     name: 'LCatalog',
@@ -42,21 +42,14 @@ export default {
             default: 0
         },
 
-        nodesTreeRoot: {
-            type: Object,
-            default () {
-                return {
-                    text: '无标题',
-                    children: [],
-                    selected: true
-                };
-            }
-        },
-
         nodesTreeMap: {
             type: Array,
             default () {
-                return [];
+                return [{
+                    text: '无标题',
+                    children: [],
+                    selected: true
+                }];
             }
         }
     },
@@ -69,12 +62,13 @@ export default {
     computed: {
         stateInterface () {
 
-            // 无其他作用，收集依赖项
-            this.nodesTreeMap;
-
             return initCatalogCom(this.nodesTreeMap, {
                 threshhold: this.threshhold
             });
+        },
+
+        nodesTreeRoot () {
+            return nodesTreeMap[0];
         }
     },
 

@@ -2,12 +2,17 @@ import {
     initSelectedNode,
     initScroll
 } from './scroll'
-import { initObserveScroll } from './ob-scroll'
-import { extend } from './uitl'
+import {
+    initObserveScroll
+} from './ob-scroll'
+import {
+    extend,
+    isTreeNode
+} from './uitl'
 
 // 存储observable接口
 
-function initNodeState (NodesMap) {
+function initNodeState(NodesMap) {
 
     // 获取被选中的节点更新其状态为选中
     let {
@@ -34,7 +39,7 @@ function initNodeState (NodesMap) {
     return {
 
         // 将被选中的节点设为被选中状态
-        updatePrevNode (node) {
+        updatePrevNode(node) {
 
             // 解除之前节点的选中状态
             listState.prevSelectedNode.selected = false;
@@ -44,21 +49,21 @@ function initNodeState (NodesMap) {
             node.selected = true;
         },
 
-        getOrderMap () {
+        getOrderMap() {
             return listState.orderToNodeMap;
         },
 
-        getCurrentWatchIndex () {
+        getCurrentWatchIndex() {
             return listState.currentWatchIndex;
         },
 
-        getNodesMap () {
+        getNodesMap() {
             return listState.nodesMap;
         }
     };
 }
 
-function initOrderMap (NodesMap) {
+function initOrderMap(NodesMap) {
     let node = null,
         orderMap = {};
     for (node of NodesMap) {
@@ -69,10 +74,10 @@ function initOrderMap (NodesMap) {
 }
 
 // 初始目录组件接口，只需要传入MD文章的节点Map
-export function initCatalogCom (NodesMap, opts = {}) {
+export function initCatalogCom(NodesMap, opts = {}) {
 
     // 返回undefined，好让其他组件使用默认值
-    if (NodesMap.length === 0) return void 0;
+    if (!isTreeNode(NodesMap[0])) return void 0;
 
     const NodeState = initNodeState(NodesMap);
 
@@ -83,7 +88,7 @@ export function initCatalogCom (NodesMap, opts = {}) {
     return {
 
         // 用于点击跳转至指定的node
-        jumpToHeading (node) {
+        jumpToHeading(node) {
             let {
                 scrollToOrder,
                 updatePrevNode
@@ -95,4 +100,3 @@ export function initCatalogCom (NodesMap, opts = {}) {
         }
     };
 }
-
