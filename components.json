@@ -1,5 +1,5 @@
 {
-    "l-markdown": "./packages/l-markdown/src/index.vue",
-    "l-catalog": "./packages/l-catalog/src/index.vue",
-    "l-gradient-color": "./packages/l-gradient-color/src/index.vue"
+    "l-markdown": "./packages/l-markdown/index.js",
+    "l-catalog": "./packages/l-catalog/index.js",
+    "l-gradient-color": "./packages/l-gradient-color/index.js"
 }

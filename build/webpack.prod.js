@@ -8,16 +8,15 @@ module.exports = {
     mode: 'production',
 
     entry: {
-        "l-markdown": './src/index.js'
+        "l-markdown": './packages/index.js'
     },
 
     output: {
-        filename: '[name].component.js',
+        filename: '[name].components.js',
         chunkFilename: '[id].js',
         path: path.join(process.cwd(), './lib'),
         library: 'l-markdown-components',
-        libraryTarget: 'umd',
-        umdNamedDefine: true
+        libraryTarget: 'commonjs2'
     },
 
     externals: {
