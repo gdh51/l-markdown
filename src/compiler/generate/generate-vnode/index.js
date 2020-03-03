@@ -17,7 +17,6 @@ export function generateRenderFn (root, opts) {
         // 上一个处理的h标签的等级
         prevHlevel: null,
         nodesTreeMap: [],
-        nodesTreeRoot: null,
         prevNode: null,
         transformTotree: opts.transformTotree
     };
@@ -29,7 +28,6 @@ export function generateRenderFn (root, opts) {
 
     return {
         rootVNode: genElement(root, stack),
-        nodesTreeRoot: stack.nodesTreeRoot,
         nodesTreeMap: stack.nodesTreeMap,
         bindElement
     };

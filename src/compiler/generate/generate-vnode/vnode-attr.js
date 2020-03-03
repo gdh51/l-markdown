@@ -31,7 +31,6 @@ function genHRef(stack, tag, ast) {
     // 存储h1根节点
     if (tag === 'h1') {
         let rootNode = createTreeNode(tag, ast._innerText, '0');
-        stack.nodesTreeRoot = rootNode
         stack.nodesTreeMap.push(rootNode);
         stack.prevNode = rootNode;
         return '0';

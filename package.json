@@ -1,6 +1,6 @@
 {
     "name": "l-markdown",
-    "version": "1.0.3",
+    "version": "1.0.5",
     "description": "A markdown component and independent markdown compiler.",
     "main": "lib/l-markdown.pure.js",
     "scripts": {
@@ -44,7 +44,8 @@
     },
     "files": [
         "lib",
-        "src"
+        "src",
+        "packages"
     ],
     "keywords": [
         "vue",

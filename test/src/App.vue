@@ -1,8 +1,7 @@
 <template>
     <div id="app">
         <l-gradient-color>sdsd</l-gradient-color>
-        <LCatalog :nodesTreeMap="a"
-            :nodesTreeRoot="b"></LCatalog>
+        <LCatalog :nodesTreeMap="a"></LCatalog>
         <LMarkdown :text="`# sdsds\n
 ## sdasdsdsd
 s
@@ -72,8 +71,7 @@ export default {
 
     methods: {
         re(e) {
-            this.a = e.nodesTreeMap
-            this.b= e.nodesTreeRoot
+            this.a = e
         }
     }
 }

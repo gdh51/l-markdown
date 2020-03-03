@@ -76,9 +76,11 @@ export default {
 
     methods: {
         initNodesOfDOM () {
-            let mdRenderHelper = this.mdRenderHelper;
+            let mdRenderHelper = this.mdRenderHelper,
+                root = mdRenderHelper.nodesTreeMap && mdRenderHelper.nodesTreeMap[0];
 
-            if (this.transformTotree && mdRenderHelper.nodesTreeRoot) {
+            // 必须保证开启的情况下且，map中节点为TreeNode节点
+            if (this.transformTotree && root && typeof root.order === 'string') {
 
                 // 将属性目录对应节点与DOM文章的DOM元素绑定
                 mdRenderHelper.bindElement(mdRenderHelper.nodesTreeMap ,this.$refs);

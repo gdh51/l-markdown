@@ -14,7 +14,6 @@ export function initMixin () {
         this.$options = options;
 
         if (options.mode === 'vnode') {
-            this.nodesTreeRoot = null;
             this.nodesTreeMap = [];
         }
 

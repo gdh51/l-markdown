@@ -18,5 +18,5 @@ export function throttle (fn, ctx, time) {
 }
 
 export function isTreeNode (node) {
-    return node && (node.name === 'TreeNode');
+    return typeof node === 'object' && ('order' in node);
 }

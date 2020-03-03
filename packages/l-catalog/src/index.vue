@@ -61,14 +61,13 @@ export default {
 
     computed: {
         stateInterface () {
-
             return initCatalogCom(this.nodesTreeMap, {
                 threshhold: this.threshhold
             });
         },
 
         nodesTreeRoot () {
-            return nodesTreeMap[0];
+            return (this.nodesTreeMap[0] || {});
         }
     },
 
