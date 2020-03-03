@@ -1,0 +1,21 @@
+export const defaultClass = {
+    'article': 'article-content',
+    'h1': 'article-title',
+    'h2': 'h2',
+    'h3': 'h3',
+    'h4': 'h4',
+    'h5': 'h5',
+    'p': 'p',
+    'code': 'code',
+    'strong': 'bold',
+    'blockquote': 'quote',
+    'img': 'img',
+    'a': 'link',
+    'i': 'italic',
+    'ul': 'ul-list',
+    'ol': 'ol-list',
+    'ul.li': 'ul-list-item',
+    'ol.li': 'ol-list-item',
+    'pre': 'pre',
+    'pre.code': 'pre-code'
+};
