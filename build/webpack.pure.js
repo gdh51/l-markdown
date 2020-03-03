@@ -2,7 +2,7 @@ const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 
-
+// 纯净版本，仅有Markdown编译器
 module.exports = {
     mode: 'production',
 

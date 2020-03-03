@@ -1,4 +1,6 @@
-import { createEleSymbol } from '../ast/index'
+import { createEleSymbol, createTextSymbol } from '../ast/index'
+import { setParent } from '../../compiler/parse/parse-helper'
+
 export function isUndefined(val) {
     return val === void 0;
 }

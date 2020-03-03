@@ -1,8 +1,8 @@
-import LMarkdown from './packages/l-markdown/src/index.vue'
-import LMdArticle from './packages/l-md-article/src/index.vue'
-import LGradientColor from './packages/l-gradient-color/src/index.vue'
+import LMarkdown from './l-markdown/src/index.vue'
+import LCatalog from './l-catalog/src/index.vue'
+import LGradientColor from './l-gradient-color/src/index.vue'
 
-const Components = [LMarkdown, LMdArticle, LGradientColor];
+const Components = [LMarkdown, LCatalog, LGradientColor];
 
 function install (Vue, opts = {}) {
     Components.forEach(component => {
@@ -17,6 +17,6 @@ if (typeof window !== 'undefined' && window.Vue) {
 export default {
     install,
     LMarkdown,
-    LMdArticle,
+    LCatalog,
     LGradientColor
 };

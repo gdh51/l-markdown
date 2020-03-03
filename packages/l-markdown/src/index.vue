@@ -60,6 +60,8 @@ export default {
 
             // 一个函数，用于将生成的ast树和元素绑定
             mdRenderHelper: null,
+
+            // markdown实例
             md: null
         };
     },
@@ -77,6 +79,8 @@ export default {
             let mdRenderHelper = this.mdRenderHelper;
 
             if (this.transformTotree && mdRenderHelper.nodesTreeRoot) {
+
+                // 将属性目录对应节点与DOM文章的DOM元素绑定
                 mdRenderHelper.bindElement(mdRenderHelper.nodesTreeMap ,this.$refs);
 
                 // 挂载完毕后将文章的标题元素暴露接口给外部

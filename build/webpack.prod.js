@@ -3,6 +3,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
+// 组件整合版
 module.exports = {
     mode: 'production',
 

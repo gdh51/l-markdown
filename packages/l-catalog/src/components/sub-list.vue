@@ -1,5 +1,6 @@
 <template>
-    <ul v-if="subChildren.length">
+    <ul v-if="subChildren.length"
+        class="sub_list">
         <li class="sub_item"
             v-for="(child, index) in subChildren"
            :key="index">
@@ -19,19 +20,23 @@
 </template>
 
 <style lang="stylus" scoped>
-.sub_item
-    padding-left 14px
+.sub_list
+    padding 0
+    margin 0
+    .sub_item
+        padding-left 14px
+        list-style none
 
-    .sub_item-subtitle
-        padding 4px 0 4px 4px
+        .sub_item-subtitle
+            padding 4px 0 4px 4px
 
-    .sub_item-level
-        padding-right 4px
-        font-weight bold
+        .sub_item-level
+            padding-right 4px
+            font-weight bold
 </style>
 
 <script>
-import LGradientColor from '../../../../l-gradient-color/src/index'
+import LGradientColor from '../../../l-gradient-color/src/index'
 
 export default {
     name: 'SubList',

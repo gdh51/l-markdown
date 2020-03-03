@@ -18,6 +18,12 @@ sample
 - 标题`h1~h6`：`# sample`等等
 - 内联元素嵌套：`>sample1 *sample*...`
 
+如果直接引入，则是纯净版的`Markdown`编译器。
+
+```js
+import { LMarkdown } from 'l-markdown'
+```
+
 ## 配置说明
 
 那么其构造函数可以接受一个配置(可选)，配置对象的具体字段为：
@@ -111,7 +117,52 @@ const renderHelper = {
 
 ## 附带的Vue组件
 
-除了基本的编译器外呢，它还携带了两个开箱即用的`Markdown`组件。
+除了基本的编译器外呢，它还携带了三个开箱即用的`Markdown`组件，它们都可以一起或单独引入。
+
+首先是`l-markdown`组件，它封装了编译器，直接输出元素到浏览器中。
+
+第二个是`l-catalog`组件，它必须配合`l-markdown`和`l-gradient-color`组件(这个组件可以不是必须的，但是我觉得好看强行必须了)使用。它可以使用`l-markdown`暴露出来的接口来进行目录的生成。目录会按当前内容的文档等级生成(可以不按顺序)，并且当前被选中的目录会跟随文档阅读进度一同更新；点击目录也可以跳转。
+
+第三个组件是`l-gradient-color`组件，这是个普通的元素标签，不过其背景是不断变化的渐变色，主要是好看！
+
+```js
+// 需要手动安装
+import LMarkdown from './node_modules/l-markdown/lib/l-markdown'
+import LCatalog from './node_modules/l-markdown/lib/l-catalog'
+import LGradientColor from './node_modules/l-markdown/lib/l-gradient-color'
+```
+
+通过以下方法也可以直接引入三个组件：
+
+```js
+import LMarkdown from './node_modules/l-markdown/lib/l-markdown.component'
+import Vue from 'vue'
+Vue.use(LMarkdown);
+```
+
+### 详解组件
+
+首先是`l-markdown`组件，它接收三个参数分别为：
+
+```js
+const props = {
+    renderClass: Object, // 同编译器
+    transformTotree: Boolean, // 同编译器
+    text: String // 要编译的文本
+}
+```
+
+当设置第二个参数时，该组件会通过自定义事件`md-dom-tree`暴露生成的整理`DOM`节点形成的目录树和该目录树在`DOM`顺序的数组。将这两个参数传递给`l-catalog`即可，当然你也可以通过它自己来生成目录。
+
+那么第二个组件是`l-catalog`，它有必须同时接收两个参数，还有个参数是可选的：
+
+```js
+const props = {
+    threshhold: Number, // 屏幕上方距离标题该位置时，更新目录
+    nodesTreeRoot: Object, // 目录的根节点
+    nodesTreeMap: Array // 目录的节点的数组(可选)
+}
+```
 
 ## TODO
 

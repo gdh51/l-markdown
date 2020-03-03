@@ -1,4 +1,3 @@
-import Vue from 'vue'
 import {
     initSelectedNode,
     initScroll
@@ -7,7 +6,6 @@ import { initObserveScroll } from './ob-scroll'
 import { extend } from './uitl'
 
 // 存储observable接口
-const observable = Vue.observable;
 
 function initNodeState (NodesMap) {
 
@@ -32,8 +30,6 @@ function initNodeState (NodesMap) {
         // 一个对象，可以直接通过等级查找对应节点，比如1-1找到h3节点
         orderToNodeMap: initOrderMap(NodesMap)
     };
-
-    observable(listState);
 
     return {
 

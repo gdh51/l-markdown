@@ -4,6 +4,8 @@ const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const Components = require('../components');
 
+
+// 三个组件单独打包的
 module.exports = {
     mode: 'production',
 
