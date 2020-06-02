@@ -1,7 +1,7 @@
 import { symbol2Tag, SingleSideSymbol, unarySymbol, specialRE } from '../constants'
 
 export class MarkAst {
-    constructor(symbol, raw, text, closed) {
+    constructor(symbol, raw, text, closed, tag) {
 
         // 符号的字符串表达式
         this.symbol = symbol;
@@ -13,20 +13,22 @@ export class MarkAst {
         if (text) {
             this.text = text;
         } else {
+
             // 符号对应的标签，文本内容不具有标签
-            this.tag = symbol2Tag[symbol];
+            this.tag = tag || symbol2Tag[symbol];
         }
         this.closed = closed || false;
         this.parent = null;
         this.children = [];
+        this.attrs = null;
 
         // 是否为一元标签
         this.special = false;
     }
 }
 
-export function createEleSymbol (symbol = '', raw = '', closed = false) {
-    return new MarkAst(symbol, raw, void 0, closed);
+export function createEleSymbol (symbol = '', raw = '', closed = false, tag) {
+    return new MarkAst(symbol, raw, void 0, closed, tag);
 }
 
 export function isSingleSideSymbol(ast) {
@@ -51,6 +53,7 @@ export function isOlistSymbol (ast) {
 }
 
 export function isUlistSymbol (ast) {
+    if (typeof ast === 'string') ast = { symbol: ast };
     return ast && (ast.symbol === '+' || ast.symbol === '-');
 }
 

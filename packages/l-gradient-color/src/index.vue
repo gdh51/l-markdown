@@ -2,6 +2,8 @@
     <a class="gradient-bg ellipsis"
       :class="[warpperClass, selected ? 'active' : '']"
        href="javascript:void 0;"
+       ref="wrapperEl"
+      :style="`background-size: ${backSize}`"
       :title="title">
         <slot></slot>
     </a>
@@ -11,7 +13,6 @@
 gradientColor()
     border-radius 5px
     background-image linear-gradient(45deg, #feac5e, #c779d0, #4bc0c8, #feac5e, #c779d0, #4bc0c8)
-    background-size 1000px
     animation gradientColor 3s linear infinite
 
 @keyframes gradientColor {
@@ -38,7 +39,7 @@ gradientColor()
     gradientColor()
 
 .ellipsis
-    word-wrap none
+    word-wrap break-word
     text-overflow ellipsis
 </style>
 
@@ -63,7 +64,18 @@ export default {
     },
 
     data () {
-        return {}
+        return {
+            backSize: '1000px'
+        };
+    },
+
+    mounted () {
+
+        // 这里需要根据容器大小来觉得动画的宽度
+        let elWidth = this.$refs.wrapperEl.getBoundingClientRect().width;
+        if (elWidth) {
+            this.backSize = elWidth * 5 + 'px';
+        }
     }
 }
 </script>

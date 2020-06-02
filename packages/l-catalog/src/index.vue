@@ -15,10 +15,7 @@
 
 <style lang="stylus" scoped>
 .catalog-container
-    width 250px
     font-size 14px
-    position fixed
-    right 0
 
     .catalog-title
         padding 4px

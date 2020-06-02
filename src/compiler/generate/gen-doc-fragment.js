@@ -1,7 +1,7 @@
 import { isTextSymbol } from '../../core/ast/index'
 import { symbol2Tag } from '../../core/constants'
 import { addClass } from '../../core/handle-class'
-import { setAttr } from '../../core/uitl/index'
+import { setAttr } from '../../core/util/index'
 
 export function generateDocFragment(root, options) {
     let frame = document.createDocumentFragment(),

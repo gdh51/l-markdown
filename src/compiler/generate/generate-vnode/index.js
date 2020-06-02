@@ -1,5 +1,4 @@
 import { isTextSymbol, completeHInnerText } from '../../../core/ast/index'
-import { symbol2Tag } from '../../../core/constants'
 import { handleEleAttr } from './vnode-attr'
 import { bindElement } from './tree-node';
 
@@ -36,7 +35,9 @@ export function generateRenderFn (root, opts) {
 // 这里根据后面的需求可能会将renderClass该为options
 function genElement(ast, stack) {
     let children = ast.children,
-        tag = symbol2Tag[ast.symbol];
+
+        // 元素标签已在生成抽象语法树时决定了
+        tag = ast.tag;
 
     return stack.c(tag, handleEleAttr(tag, ast, stack),
     children.map(child => isTextSymbol(child) ? child.text : genElement(child, stack)));

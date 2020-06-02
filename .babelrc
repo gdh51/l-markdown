@@ -1,18 +1,36 @@
 {
-    "plugins": [
-        [
-            "@babel/plugin-transform-runtime"
-        ]
-    ],
     "presets": [
         [
             "@babel/preset-env",
+            // 不对es module进行转化
             {
                 "loose": true,
                 "modules": false,
                 "targets": {
-                    "browsers": ["> 1%", "last 2 versions", "not ie <= 8"]
-                }
+                    "browsers": [
+                        "> 1%",
+                        "last 2 versions",
+                        "not ie <= 8"
+                    ]
+                },
+                // 按序引入polyfill
+                "useBuiltIns": "usage",
+                "corejs": 3
+            }
+        ]
+    ],
+    "plugins": [
+        [
+            "component",
+            {
+                "libraryName": "l-markdown"
+            }
+        ],
+        [
+            // 用于pollyfill
+            "@babel/plugin-transform-runtime",
+            {
+                "corejs": 3
             }
         ]
     ]

@@ -2,41 +2,19 @@
     <div id="app">
         <l-gradient-color>sdsd</l-gradient-color>
         <LCatalog :nodesTreeMap="a"></LCatalog>
-        <LMarkdown :text="`# sdsds\n
-## sdasdsdsd
-s
-s
-s
-s
-s
-## sdsd s
-## sadasds
-s
-s
-s
-s
-s
-s
-s
-s
-s
-s
-s
-s
-s
-s
-s
-s
-s
-s
-s
-s
-s
-s
-s
-s
-s
-
+        <LMarkdown :text="`# sdsds
+    - sds
+- sds1
+    - sdsd2
+        - sdsd3
+        - sdsd3
+        - cccc
+sidjsijd
+            - sdsdsd4
+        - sdsd5
+    - sdsd6
+    1. sdsd1
+    3. sds 2
 `"
                     :transformTotree="true"
                     @md-dom-tree="re"></LMarkdown>
@@ -57,7 +35,6 @@ s
 </style>
 
 <script>
-
 export default {
     name: 'App',
 

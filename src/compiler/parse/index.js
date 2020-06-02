@@ -2,7 +2,7 @@ import {
     reviseEndNewline,
     isUndefined,
     reviseTopic
-} from '../../core/uitl'
+} from '../../core/util'
 import {
     createEleSymbol,
     createTextSymbol,
@@ -19,8 +19,7 @@ import {
     newline,
     imgRE,
     linkRE,
-    olistRE,
-    ulistRE,
+    listRE,
     codeRE
 } from '../../core/constants'
 import {
@@ -28,11 +27,16 @@ import {
     setParent,
     generateParagraph
 } from './parse-helper'
+import {
+    parseListCtx
+} from './list-helper'
 
-export function parseLexer(template, inline = false, init = false) {
+export function parseLexer(template, inline = false, init = false, root) {
 
-    // 规范语法
-    template = reviseEndNewline(template);
+    if (init) {
+        // 规范语法
+        template = reviseEndNewline(template);
+    }
 
     let unhandleTemplate = template,
         index = 0,
@@ -43,7 +47,7 @@ export function parseLexer(template, inline = false, init = false) {
         pStartIndex = 0,
 
         // 定义一个根节点，方便处理数据
-        lastAst = createEleSymbol('root'),
+        lastAst = root || createEleSymbol('root'),
         stack = [lastAst];
 
     if (init) {
@@ -54,10 +58,10 @@ export function parseLexer(template, inline = false, init = false) {
     while (!!unhandleTemplate) {
 
         times++
-        if (times >= 100) return new Error('???');
+        if (times >= 100) return new Error('There must be a loop!');
 
         // 处理转义字符
-        if (escapeRE.test(unhandleTemplate.match(escapeRE))) {
+        if (escapeRE.test(unhandleTemplate)) {
             let match = unhandleTemplate.match(escapeRE),
                 ast = createTextSymbol(match[1]);
 
@@ -83,15 +87,11 @@ export function parseLexer(template, inline = false, init = false) {
                 continue;
             }
 
-            // 匹配无序列表
-            if (ulistRE.test(unhandleTemplate)) {
-                singleMatch(ulistRE).innerClass = true;
-                continue;
-            }
-
-            // 匹配有序列表
-            if (olistRE.test(unhandleTemplate)) {
-                singleMatch(olistRE, null, 'num').innerClass = true;
+            // 匹配列表
+            if (listRE.test(unhandleTemplate)) {
+                let result = parseListCtx(unhandleTemplate, parseLexer);
+                setParent(result.listRoot, lastAst);
+                unhandleTemplate = result.unhandleTemplate;
                 continue;
             }
 

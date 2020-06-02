@@ -3,8 +3,7 @@ export const
     // 匹配一元标签，以换行符结束的
     titleLevelRE = /^(\#{1,6})\s/,
     quoteRE = /^(>)/,
-    ulistRE = /^([-+])\s/,
-    olistRE = /^(\d+\.)\s/,
+    listRE = /^\x20*((\d+\.)|[-+])\s/,
 
     // 匹配1~2个的闭合符号
     shortCodeRE = /^(`{1,2})/,
