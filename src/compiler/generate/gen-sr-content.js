@@ -45,12 +45,12 @@ function generateUnaryTag (ast, template, renderClass) {
 
 function handleSpecial(ast) {
     if (isSpecialSymbol(ast)) {
-        return `${generateSpecialAttr(ast.special)} `
+        return `${generateSpecialAttr(ast.attrs)} `
     }
 
     return ''
 }
 
-function generateSpecialAttr (special) {
-    return Object.keys(special).map(key => ` ${key}="${special[key]}"`).join('');
+function generateSpecialAttr(attrs) {
+    return Object.keys(attrs).map(key => ` ${key}="${attrs[key]}"`).join('');
 }

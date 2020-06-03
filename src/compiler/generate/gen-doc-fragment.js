@@ -35,8 +35,8 @@ function transform2Node(ast, parent, renderClass) {
             renderClass[tag] && addClass(node, renderClass[tag]);
 
             // 处理一元标签的属性
-            if (ast.special) {
-                setAttr(node, ast.special);
+            if (ast.attrs) {
+                setAttr(node, ast.attrs);
             }
         }
 

@@ -1,13 +1,18 @@
 import {
     createEleSymbol,
     isUlistSymbol
-} from '../../core/ast/index'
-import { setParent } from './parse-helper';
-import { isUndefined } from '../../core/util/index'
+} from '../../../core/ast/index'
+import { setParent } from './index';
+import { isUndefined } from '../../../core/util/index'
 
 const olSymbolRE = /\d+\./;
 
-// 当解析到li标签时，则之后的解析不直接通过原始解析器进行解析，改为在此内部解析
+/**
+ * 列表语法解析函数，当解析到li标签时，
+ * 则之后的模版解析不直接通过原始解析器进行解析， 改为在此内部解析
+ * @param {String} template 当前剩余的要解析的模版
+ * @param {Function} parseLexer 原全语法解析函数
+ */
 export function parseListCtx(template, parseLexer) {
     let liRE = new RegExp(`^(\\x20*)(\\-|\\+|\\d+\\.)\\x20([^\\n]*)\\n`),
         continueRE = /^(\x20*)([^\n]*)\n/,
@@ -86,11 +91,6 @@ export function parseListCtx(template, parseLexer) {
                  */
                 if (stack[targetDepth] && (isSameList = !isDiffList(symbol, stack[targetDepth]))) {
                     setParent(li, stack[targetDepth].parent);
-
-                    // 当为有序列表但列表项不连续时，设置新列表项起始序号
-                    if (isOlist && !isContinuous(li, stack[targetDepth])) {
-                        (li.attrs = li.attrs || {}).start = li.symbol.slice(0, -1);
-                    }
                 } else {
 
                     // 当需要创建新的有序列表时，
@@ -106,7 +106,7 @@ export function parseListCtx(template, parseLexer) {
                     }
 
                     if (isOlist && !startWith1(li)) {
-                        (li.attrs = li.attrs || {}).start = li.symbol.slice(0, -1);
+                        (newList.attrs = newList.attrs || {}).start = li.symbol.slice(0, -1);
                     }
                 }
 

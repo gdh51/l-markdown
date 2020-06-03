@@ -44,3 +44,11 @@ export function setAttr (el, key, value) {
 
     el.setAttribute(key, value);
 }
+
+export function extend(_to, _from) {
+    if (!_to || !_from) return {};
+    for (var key in _from) {
+        _to[key] = _from[key];
+    }
+    return _to;
+}

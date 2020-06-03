@@ -8,7 +8,7 @@ import {
 import {
     extend,
     isTreeNode
-} from './uitl'
+} from './util'
 
 // 存储observable接口
 

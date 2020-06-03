@@ -4,6 +4,7 @@ import {
     setParent
 } from './tree-node';
 import { assignRenderClass } from '../../../core/handle-class'
+import { extend } from '../../../core/util/index'
 
 const titleRE = /^(\#{1,5})$/;
 
@@ -18,9 +19,10 @@ export function handleEleAttr(tag, ast, stack) {
         attr.ref = genHRef(stack, tag, ast);
     }
 
-    // 处理一元标签的属性
-    if (ast.special) {
-        attr.attrs = ast.special;
+    if (ast.attrs) {
+
+        // 扩展原ast元素上属性
+        attr.attrs = extend({}, ast.attrs);
     }
 
     return attr;
@@ -90,6 +92,7 @@ function resetHRefStack(refStack, level) {
 function redirectParentNode(node, stack) {
     let nodesTreeMap = stack.nodesTreeMap,
         start = nodesTreeMap.length - 1;
+
     // 因为每创建一个节点会将节点加入nodesTreeMap中，
     // 所以此处我们想找到当前node的上一个同级节点即可
     // 它们一定有共同的父节点

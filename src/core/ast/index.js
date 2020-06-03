@@ -21,9 +21,6 @@ export class MarkAst {
         this.parent = null;
         this.children = [];
         this.attrs = null;
-
-        // 是否为一元标签
-        this.special = false;
     }
 }
 

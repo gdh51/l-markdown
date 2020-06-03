@@ -1,4 +1,4 @@
-import { throttle } from './uitl'
+import { throttle } from './util'
 
 export function initObserveScroll (nodeState, threshhold) {
 

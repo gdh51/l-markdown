@@ -23,13 +23,13 @@ import {
     codeRE
 } from '../../core/constants'
 import {
-    parselinkctx,
+    parseLinkCtx,
     setParent,
     generateParagraph
-} from './parse-helper'
+} from './parse-helper/index'
 import {
     parseListCtx
-} from './list-helper'
+} from './parse-helper/index'
 
 export function parseLexer(template, inline = false, init = false, root) {
 
@@ -310,6 +310,7 @@ export function parseLexer(template, inline = false, init = false, root) {
      * @param {String} symbol 是否直接指定了生成标签ast对象的符号，如有有则直接使用
      */
     function singleMatch(reg, isSame, symbol) {
+
         // 匹配到的对象
         let match = unhandleTemplate.match(reg),
             ast = createEleSymbol(symbol || match[isSame ? 0 : 1], match[0], true);
@@ -323,33 +324,34 @@ export function parseLexer(template, inline = false, init = false, root) {
         return ast;
     }
 
+    // 匹配链接类型语法
     function linkMatch(reg, symbol, attrs) {
+
         // 获取匹配及其内容的处理结果
-        let inlineResult = parselinkctx(reg, unhandleTemplate, parseLexer),
-            match = inlineResult.match;
+        let inlineResult = parseLinkCtx(reg, unhandleTemplate, parseLexer),
+            match = inlineResult.match,
+            [link, title] = inlineResult.symbolMsg;
 
         // 如果当前的[]()语法成立
         if (inlineResult.isEstablish) {
-            let ast = createEleSymbol(symbol, match[0], true),
-                special = {};
+            let ast = createEleSymbol(symbol, match[0], true);
+            ast.attrs = ast.attrs || {};
 
             attrs.forEach((attr, index) => {
-                special[attr] = match[index === 0 ? 2 : 4];
+                ast.attrs[attr] = inlineResult.symbolMsg[index];
             });
-
-            ast.special = special;
 
             setParent(ast, lastAst);
             if (symbol === 'link') {
-                setParent(inlineResult.title, ast);
+                setParent(title, ast);
             }
 
         // 如果当前语法不成立，则全部转化为文本
         } else {
             setParent([createTextSymbol(match[1]),
-                ...inlineResult.title,
+                ...title,
                 createTextSymbol(match[3]),
-                ...inlineResult.link,
+                ...link,
                 createTextSymbol(match[5])
             ], lastAst);
         }
